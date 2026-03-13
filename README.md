@@ -12,7 +12,7 @@ Class 02 [Sequence Alignment & Database Searching (Pt. 1)](class02/class02.pdf)
 
 Class 03 [Advanced Database Searching](class03/class03.pdf)
 
-Class 04 [R fundamentals](Class04/class04.pdf)
+Class 04 [R fundamentals](class04/class04.pdf)
 
 Class 05 [Data viz with ggplot](class05/Class05.md)
 
