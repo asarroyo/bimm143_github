@@ -1,0 +1,89 @@
+---
+title: "Class 17: Analyzing Sequence Data in Cloud"
+author: "Areidy Arroyo (A17412951)"
+format: gfm
+toc: TRUE
+---
+
+## Downstream Analysis
+
+Install R package `BiocManager::install("tximport")` used to import transcript level RNA sequence results. We will be using gene counts during downstream analysis
+
+```{r}
+library(tximport)
+
+# setup the folder and file-names to read
+folders <- dir(pattern="SRR21568*")
+samples <- sub("_quant", "", folders)
+files <- file.path( folders, "abundance.h5" )
+names(files) <- samples
+
+txi.kallisto <- tximport(files, type = "kallisto", txOut = TRUE)
+```
+
+Provide transcript counts for each sample
+
+```{r}
+head(txi.kallisto$counts)
+```
+
+Total count calculated for each sample
+
+```{r}
+colSums(txi.kallisto$counts)
+```
+
+Filter transcripts with no reads
+
+```{r}
+sum(rowSums(txi.kallisto$counts)>0)
+```
+
+```{r}
+to.keep <- rowSums(txi.kallisto$counts) > 0
+kset.nonzero <- txi.kallisto$counts[to.keep,]
+```
+
+```{r}
+keep2 <- apply(kset.nonzero,1,sd)>0
+x <- kset.nonzero[keep2,]
+```
+
+
+## Principal Component Analysis
+
+Summarize PCA samples 
+
+```{r}
+pca <- prcomp(t(x), scale=TRUE)
+```
+
+```{r}
+summary(pca)
+```
+
+PC1 vs PC2
+
+```{r}
+plot(pca$x[,1], pca$x[,2],
+     col=c("blue","blue","red","red"),
+     xlab="PC1", ylab="PC2", pch=16)
+```
+
+PC1 vs PC3
+
+```{r}
+plot(pca$x[,1], pca$x[,3],
+     col=c("blue","blue","red","red"),
+     xlab="PC1", ylab="PC3", pch=16)
+```
+
+PC2 vs PC3
+
+```{r}
+plot(pca$x[,2], pca$x[,3],
+     col=c("blue","blue","red","red"),
+     xlab="PC2", ylab="PC3", pch=16)
+```
+
+
