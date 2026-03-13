@@ -28,13 +28,13 @@ Class 10 [Structural Bioinformatics](Class10/class10.md)
 
 Class 11 [AlphaFold](class11/class11.md)
 
-Class 12 [Class12](class12/Class12.md)
+Class 12 [RNASeq Galaxy](class12/Class12.md)
 
 Class 13 [RNASeq with DESeq2](class13/class13.md)
 
 Class 14 [RNASeq Mini-Project](class14/class14.md)
 
-Class 15 [GitHub Repo](class15/git_notes.md)
+Class 15 [GitHub Repo](class15/class15.md)
 
 Class 16 [Unix Basics](class16/class16.pdf)
 
