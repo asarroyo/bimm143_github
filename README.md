@@ -34,14 +34,12 @@ Class 13 [RNASeq with DESeq2](class13/class13.md)
 
 Class 14 [RNASeq Mini-Project](class14/class14.md)
 
-Class 15 [GitHub Repo]()
+Class 15 [GitHub Repo](class15/git_notes.md)
 
-Class 16 [Unix Basics]()
+Class 16 [Unix Basics](class16/class16.pdf)
 
 Class 17 [Analyzing Sequence Data in Cloud](class17/class17.md)
 
 Class 18 [Pertussis Mini Project](class18/class18.md)
 
 Class 19 [Cancer Mutation](class19/class19.md)
-
-Class 20 [Github Pages]()
