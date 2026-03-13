@@ -16,7 +16,7 @@ Class 04 [R fundamentals](Class04/04_Lab_report.md)
 
 Class 05 [Data viz with ggplot](class05/Class05.md)
 
-Class 06 []()
+Class 06 [R Functions]()
 
 Class 07 [Machine Learning 1](class07/class07.md)
 
@@ -34,14 +34,14 @@ Class 13 [RNASeq with DESeq2](class13/class13.md)
 
 Class 14 [RNASeq Mini-Project](class14/class14.md)
 
-Class 15 []()
+Class 15 [GitHub Repo]()
 
-Class 16 []()
+Class 16 [Unix Basics]()
 
 Class 17 [Analyzing Sequence Data in Cloud](class17/class17.md)
 
 Class 18 [Pertussis Mini Project](class18/class18.md)
 
-Class 19 [](class19/class19.md)
+Class 19 [Cancer Mutation](class19/class19.md)
 
-Class 20 []()
+Class 20 [Github Pages]()
