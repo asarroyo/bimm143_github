@@ -16,7 +16,7 @@ Class 04 [R fundamentals](Class04/04_Lab_report.md)
 
 Class 05 [Data viz with ggplot](class05/Class05.md)
 
-Class 06 [R Functions]()
+Class 06 [R Functions](class06/class06.md)
 
 Class 07 [Machine Learning 1](class07/class07.md)
 
