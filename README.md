@@ -6,12 +6,42 @@ My classwork from [BIMM143](https://bioboot.github.io/bimm143_W26/) at UC San Di
 
 * Introductory classes*
 
-Class 04 [R fundamentals](Class04/04_Lab_report.pdf)
+Class 01 [Bioinformatics Databases and Key Online Resource](BIMM 143 Lab 1)
 
-Class 05 [Data viz with ggplot](class05/Class05.pdf)
+Class 02 [Sequence Alignment & Database Searching (Pt. 1)](BIMM 143 Lab2 copy)
 
-Class 07 [Machine Learning 1](class07/class07.pdf)
+Class 03 [Advanced Database Searching](03_Lab_report)
 
-Class 08 [Breast Cancer Mini Project](class08/class08.pdf)
+Class 04 [R fundamentals](Class04/04_Lab_report.md)
 
-Class 09 [Candy Mini Project](class09/class09.pdf)
+Class 05 [Data viz with ggplot](class05/Class05.md)
+
+Class 06 []()
+
+Class 07 [Machine Learning 1](class07/class07.md)
+
+Class 08 [Breast Cancer Mini Project](class08/class08.md)
+
+Class 09 [Candy Mini Project](class09/class09.md)
+
+Class 10 [Structural Bioinformatics](Class10/class10.md)
+
+Class 11 [AlphaFold](class11/class11.md)
+
+Class 12 [Class12](class12/Class12.md)
+
+Class 13 [RNASeq with DESeq2](class13/class13.md)
+
+Class 14 [RNASeq Mini-Project](class14/class14.md)
+
+Class 15 []()
+
+Class 16 []()
+
+Class 17 [Analyzing Sequence Data in Cloud](class17/class17.md)
+
+Class 18 [Pertussis Mini Project](class18/class18.md)
+
+Class 19 [](class19/class19.md)
+
+Class 20 []()
