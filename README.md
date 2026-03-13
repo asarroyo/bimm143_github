@@ -6,13 +6,13 @@ My classwork from [BIMM143](https://bioboot.github.io/bimm143_W26/) at UC San Di
 
 * Introductory classes*
 
-Class 01 [Bioinformatics Databases and Key Online Resource](BIMM 143 Lab 1)
+Class 01 [Bioinformatics Databases and Key Online Resource](class01/class01.pdf)
 
-Class 02 [Sequence Alignment & Database Searching (Pt. 1)](BIMM 143 Lab2 copy)
+Class 02 [Sequence Alignment & Database Searching (Pt. 1)](class02/class02.pdf)
 
-Class 03 [Advanced Database Searching](03_Lab_report)
+Class 03 [Advanced Database Searching](class03/class03.pdf)
 
-Class 04 [R fundamentals](Class04/04_Lab_report.md)
+Class 04 [R fundamentals](Class04/class04.pdf)
 
 Class 05 [Data viz with ggplot](class05/Class05.md)
 
