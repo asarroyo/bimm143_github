@@ -1,7 +1,8 @@
 ---
 title: "Class 10: Structural Bioinformatics (pt. 1)"
 author: "Areidy Arroyo (A17412951)"
-format: pdf
+format: gfm
+prefer-html: true
 toc: True
 ---
 
