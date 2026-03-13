@@ -1,7 +1,7 @@
 ---
 title: "Class 7: Machine Learning 1"
 author: "Areidy (PID# A17412951)"
-format: pdf
+format: gfm
 toc: true
 ---
 

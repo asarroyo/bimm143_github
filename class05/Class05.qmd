@@ -1,7 +1,7 @@
 ---
 title: "Class 5: Data Viz with ggplot"
 author: "Areidy (PID: A17412951)"
-format: pdf
+format: gfm
 toc: true
 ---
 
