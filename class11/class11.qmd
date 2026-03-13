@@ -1,0 +1,211 @@
+---
+title: "Class 11: AlphaFold"
+author: "Areidy Arroyo A17412951"
+format: gfm
+toc: TRUE
+---
+
+## Background
+
+In this hands-on session we will utilize AlphaFold to predict protein structure from sequence.
+
+Without the aid of such approaches, it can take years of expensive laboratory work to determine the structure of just one protein. With AlphaFold we can now accurately compute a typical protein structure in as little as ten minutes.
+
+The PDB database (the main repository of experimental structures) only has **~250 thousand** structures (we saw this in the last lab). The main protein sequence database over **200 million** sequences! Only 0.125% of known sequences have known structure - this is called the "structure knowledge gap".
+
+```{r}
+(250000 / 200000000 ) *100
+```
+
+- Structures are much harder to determine than sequences
+- They are expensive (on average ~$1 million each)
+- They take on average 3-5 years to solve!
+
+## EBI AlphaFold Database
+
+The EBI has a database of pre-computed ALphaFold (AF) models called AFDB.
+This is growing overtime and can be useful to check before running AF ourselves
+
+## Running AlphaFold
+
+We can download and run locally (on our own computers) but we need a GPU. Or we can use "cloud" computing to run this on someone elses computers :-)
+
+We will use ColabFold < https://github.com/sokrypton/ColabFold >
+
+We previously found there was no AFDB entry for our HIV sequence:
+
+```
+>HIV-Pr-Dimer
+PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMSLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF:PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMSLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF
+```
+
+Here we will use AlphaFold2_mmseqs2
+
+## Custom analysis of resulting models
+
+We will move our AlphaFold results into RStudio
+
+```{r}
+results_dir <- "hivpr_23119/" 
+```
+
+```{r}
+pdb_files <- list.files(path=results_dir,
+                        pattern="*.pdb",
+                        full.names = TRUE)
+basename(pdb_files)
+```
+
+Here we will see the model sequences and all its alignments
+
+```{r}
+library(bio3d)
+
+# Read all data from Models 
+#  and superpose/fit coords
+pdbs <- pdbaln(pdb_files, fit=TRUE, exefile="msa")
+```
+We will now calculate the structural distance betwee coordinate sets using RMSD
+
+```{r}
+rd <- rmsd(pdbs, fit=T)
+
+range(rd)
+```
+
+Create a pheatmap of these coordinates
+
+```{r}
+library(pheatmap)
+
+colnames(rd) <- paste0("m",1:5)
+rownames(rd) <- paste0("m",1:5)
+pheatmap(rd)
+```
+We can now plot the pLDDT values into a PDB files and add our desired colors into the graph
+
+```{r}
+pdb <- read.pdb("1hsg")
+```
+
+```{r}
+plotb3(pdbs$b[1,], typ="l", lwd=2, sse=pdb)
+points(pdbs$b[2,], typ="l", col="red")
+points(pdbs$b[3,], typ="l", col="blue")
+points(pdbs$b[4,], typ="l", col="darkgreen")
+points(pdbs$b[5,], typ="l", col="orange")
+abline(v=100, col="gray")
+```
+
+Fix the superposition of the model creating a rigid core using `core.find()`
+
+```{r}
+core <-core.find(pdbs)
+core.inds <- print(core, vol=0.5)
+xyz <- pdbfit(pdbs, core.inds, outpath="corefit_structures")
+
+```
+
+Now that we have superposed coordinates we can open our structure from Mol*
+
+Here we will examine RMSF and its positions 
+
+```{r}
+rf <- rmsf(xyz)
+
+plotb3(rf, sse=pdb)
+abline(v=100, col="gray", ylab="RMSF")
+```
+## Predicted Alignment Error for domains
+
+Read files and predict alignment error for domains using `jsonlite()`
+
+```{r}
+library(jsonlite)
+
+pae_files <- list.files(path=results_dir,
+                       pattern=".*model.*\\.json",
+                        full.names = TRUE)
+```
+
+For example we will read models 1 and 5 here:
+
+```{r}
+pae1 <- read_json(pae_files[1],simplifyVector = TRUE)
+pae5 <- read_json(pae_files[5],simplifyVector = TRUE)
+
+attributes(pae1)
+```
+
+```{r}
+head(pae1$plddt) 
+```
+
+Calculate the max PAE value 
+
+```{r}
+pae1$max_pae
+pae5$max_pae
+```
+
+We can now plot this
+
+```{r}
+plot.dmat(pae5$pae, 
+          xlab="Residue Position (i)",
+          ylab="Residue Position (j)",
+          grid.col = "black",
+          zlim=c(0,30))
+```
+
+Now we will plot using the same z range
+```{r}
+plot.dmat(pae1$pae, 
+          xlab="Residue Position (i)",
+          ylab="Residue Position (j)",
+          grid.col = "black",
+          zlim=c(0,30))
+```
+
+
+## Residue conservation from alignment file
+
+```{r}
+aln_file <- list.files(path=results_dir,
+                       pattern=".a3m$",
+                        full.names = TRUE)
+aln_file
+```
+
+```{r}
+aln <- read.fasta(aln_file[1], to.upper = TRUE)
+```
+
+Calculate how many sequences are in the alignment
+
+```{r}
+dim(aln$ali)
+```
+
+Use `conserv()` to score the residue conservation
+
+```{r}
+sim <- conserv(aln)
+plotb3(sim[1:99], sse=trim.pdb(pdb, chain="A"),
+       ylab="Conservation Score")
+```
+
+View parts where there is a high cutoff value in the consensus sequence
+
+```{r}
+con <- consensus(aln, cutoff = 0.9)
+con$seq
+```
+
+```{r}
+m1.pdb <- read.pdb(pdb_files[1])
+occ <- vec2resno(c(sim[1:99], sim[1:99]), m1.pdb$atom$resno)
+write.pdb(m1.pdb, o=occ, file="m1_conserv.pdb")
+```
+
+
