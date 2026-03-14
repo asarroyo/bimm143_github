@@ -4,7 +4,7 @@ My classwork from [BIMM143](https://bioboot.github.io/bimm143_W26/) at UC San Di
 
 ## Index of Material
 
-* Introductory classes*
+*Introductory classes*
 
 Class 01 [Bioinformatics Databases and Key Online Resource](class01/class01.pdf)
 
